@@ -10,15 +10,15 @@ permissions:
   pages: write
   id-token: write
 
-concurreny:
+concurrency:
   group: pages
   cancel-in-progress: true
 
-  jobs:
-    build-and-deploy:
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -38,7 +38,7 @@ concurreny:
         run: npm run build
 
       - name: Setup pages
-        with: actions/configure-pages@v4
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
